@@ -45,6 +45,7 @@
           Экспортировать цитаты
         </button>
         <div id="quotes" class="mt-6 space-y-4"></div>
+        <div id="no-quotes" class="hidden mt-6 text-red-500"></div>
         <div class="mt-6 space-y-4">
           <button
             id="copy-quotes"
@@ -170,9 +171,18 @@
           const quotes = await getQuotes(bookId, userId);
 
           const quotesContainer = document.getElementById("quotes");
-          quotesContainer.innerHTML = quotes
-            .map((quote) => `<p>${quote}</p><br />`)
-            .join("");
+          const noQuotesElement = document.getElementById("no-quotes");
+
+          if (quotes.length === 0) {
+            noQuotesElement.textContent = "Цитаты для этой книги не найдены.";
+            noQuotesElement.classList.remove("hidden");
+            quotesContainer.innerHTML = "";
+          } else {
+            noQuotesElement.classList.add("hidden");
+            quotesContainer.innerHTML = quotes
+              .map((quote) => `<p>${quote}</p><br />`)
+              .join("");
+          }
 
           // Add event listener to copy quotes button
           document.getElementById('copy-quotes').addEventListener('click', () => {
