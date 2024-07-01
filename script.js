@@ -104,26 +104,32 @@ document.getElementById("fetch-quotes").addEventListener("click", async () => {
 
   const quotesContainer = document.getElementById("quotes");
   const noQuotesElement = document.getElementById("message-block");
+  const copyButton = document.getElementById("copy-quotes");
+  const downloadButton = document.getElementById("download-quotes");
 
   if (quotes.length === 0) {
     noQuotesElement.textContent = "Цитаты для этой книги не найдены.";
     noQuotesElement.classList.remove("hidden");
     quotesContainer.innerHTML = "";
+    copyButton.classList.add("hidden");
+    downloadButton.classList.add("hidden");
   } else {
     noQuotesElement.classList.add("hidden");
     quotesContainer.innerHTML = quotes
       .map((quote) => `<p>${quote}</p><br />`)
       .join("");
+    copyButton.classList.remove("hidden");
+    downloadButton.classList.remove("hidden");
   }
 
   // Add event listener to copy quotes button
-  document.getElementById("copy-quotes").addEventListener("click", () => {
+  copyButton.addEventListener("click", () => {
     copyToClipboard(quotes.join("\n\n"));
     alert("Цитаты скопированы в буфер обмена");
   });
 
   // Add event listener to download quotes button
-  document.getElementById("download-quotes").addEventListener("click", () => {
+  downloadButton.addEventListener("click", () => {
     downloadQuotes(quotes.join("\n\n"));
   });
 });

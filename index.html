@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <title>Экспортировать цитаты Букмейт</title>
   </head>
   <body>
     <main id="main-content" class="container mx-auto p-6">
@@ -44,22 +45,22 @@
         >
           Экспортировать цитаты
         </button>
-        <div id="quotes" class="mt-6 space-y-4"></div>
         <div id="message-block" class="hidden mt-6 text-red-500"></div>
         <div class="mt-6 space-y-4">
           <button
             id="copy-quotes"
-            class="w-full bg-green-500 text-white font-bold py-2 px-4 rounded hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
+            class="hidden w-full bg-green-500 text-white font-bold py-2 px-4 rounded hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
           >
             Скопировать все цитаты
           </button>
           <button
             id="download-quotes"
-            class="w-full bg-purple-500 text-white font-bold py-2 px-4 rounded hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50"
+            class="hidden w-full bg-purple-500 text-white font-bold py-2 px-4 rounded hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50"
           >
             Скачать цитаты в TXT
           </button>
         </div>
+        <div id="quotes" class="mt-6 space-y-4"></div>
       </div>
     </main>
 
