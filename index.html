@@ -45,6 +45,20 @@
           Экспортировать цитаты
         </button>
         <div id="quotes" class="mt-6 space-y-4"></div>
+        <div class="mt-6 space-y-4">
+          <button
+            id="copy-quotes"
+            class="w-full bg-green-500 text-white font-bold py-2 px-4 rounded hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50"
+          >
+            Скопировать все цитаты
+          </button>
+          <button
+            id="download-quotes"
+            class="w-full bg-purple-500 text-white font-bold py-2 px-4 rounded hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50"
+          >
+            Скачать цитаты в TXT
+          </button>
+        </div>
       </div>
     </main>
 
@@ -108,6 +122,27 @@
         }
       }
 
+      function copyToClipboard(text) {
+        const textarea = document.createElement('textarea');
+        textarea.value = text;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+      }
+
+      function downloadQuotes(quotes) {
+        const blob = new Blob([quotes], { type: 'text/plain' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'quotes.txt';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+      }
+
       // Обработчик нажатия на кнопку
       document
         .getElementById("fetch-quotes")
@@ -138,6 +173,17 @@
           quotesContainer.innerHTML = quotes
             .map((quote) => `<p>${quote}</p><br />`)
             .join("");
+
+          // Add event listener to copy quotes button
+          document.getElementById('copy-quotes').addEventListener('click', () => {
+            copyToClipboard(quotes.join('\n\n'));
+            alert('Цитаты скопированы в буфер обмена');
+          });
+
+          // Add event listener to download quotes button
+          document.getElementById('download-quotes').addEventListener('click', () => {
+            downloadQuotes(quotes.join('\n\n'));
+          });
         });
     </script>
   </body>
